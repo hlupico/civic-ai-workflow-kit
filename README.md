@@ -3,6 +3,7 @@ A practitioner's open research into where AI reduces cognitive load in governmen
 
 ## What this is
 Government staff carry enormous cognitive loads: processing applications, reviewing documents, routing requests, managing workflows that were never designed to scale. This project researches where AI can responsibly absorb some of that burden — and where humans must remain central.
+
 This is not a vendor pitch, a chatbot project, or an AI hype resource. It is a practitioner's working research system: grounded in real government workflows, honest about limitations, and focused on operational usefulness over impressive demos.
 
 ## Who this is for
@@ -34,13 +35,30 @@ Small experiments compound. Run small, specific experiments. Document what works
 Visible thinking matters. Research, synthesis, and experimentation should be documented publicly to contribute to a body of knowledge others can use.
 
 ## Current work
-This repo is being built in public as part of a structured 30-day research and practice system. 
+This repo is being built in public as part of a structured 30-day research and practice system.
 
-Week 1 focus: AI and government workflow foundations.
 Week 1 — AI + Government Workflow Foundations
+Primary question: Where does AI meaningfully fit into government operations?
 
-Workflow analysis: Permit application review
-Experiment: AI cross-document consistency checking
+Workflow analysis: Permit application review — steps, cognitive load, and AI opportunities across the full applicant and staff phases
+
+Experiment: AI cross-document consistency checking — tested whether AI could detect discrepancies across a five-document TNC operating authority license application. All planted discrepancies detected, including a VIN manufacturer prefix flag that required external knowledge of VIN structure.
+
+Week 2 — AI Readiness in Government Systems
+Primary question: What makes a workflow AI-ready?
+
+Research: Retrieval-Augmented Generation (RAG) — how it works, what it enables, government-specific risks and constraints, and the relationship between RAG and expanding LLM context windows
+
+Workflow analysis: TNC permit intake and pre-application — applicant-facing phase of the TNC operating authority license process, focused on document knowledge gaps as the primary failure mode
+
+Experiment: RAG policy compliance checking — tested whether AI can check an application against policy requirements, not just internal document consistency. Used a fictional policy document (AP-TNC-2024-01) with two application packages: one compliant, one with two planted compliance gaps. Both gaps detected with specific policy citations and exact document values. Clean result returned accurately on the compliant package with no false positives.
+
+## Key findings so far
+- AI can detect cross-document inconsistencies accurately, including inconsistencies that require external knowledge to identify (VIN manufacturer prefixes, vehicle make/model mismatches)
+- AI can check applications against policy requirements when policy is provided as context which grounds responses in specific policy sections rather than general knowledge
+- Clean results (all-clear on compliant applications) are as important as gap detection for staff trust and adoption
+- Output format and prompt design affect calibration quality. Structured output specifications in the prompt produce more consistent, scannable results
+- Trust in AI-generated results takes repeated exposure, even when intellectual trust is earned quickly.
 
 ## What I am not
 
