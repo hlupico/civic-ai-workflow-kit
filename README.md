@@ -37,14 +37,14 @@ Visible thinking matters. Research, synthesis, and experimentation should be doc
 ## Current work
 This repo is being built in public as part of a structured 30-day research and practice system.
 
-Week 1 — AI + Government Workflow Foundations
+**Week 1 — AI + Government Workflow Foundations**
 Primary question: Where does AI meaningfully fit into government operations?
 
 Workflow analysis: Permit application review — steps, cognitive load, and AI opportunities across the full applicant and staff phases
 
 Experiment: AI cross-document consistency checking — tested whether AI could detect discrepancies across a five-document TNC operating authority license application. All planted discrepancies detected, including a VIN manufacturer prefix flag that required external knowledge of VIN structure.
 
-Week 2 — AI Readiness in Government Systems
+**Week 2 — AI Readiness in Government Systems**
 Primary question: What makes a workflow AI-ready?
 
 Research: Retrieval-Augmented Generation (RAG) — how it works, what it enables, government-specific risks and constraints, and the relationship between RAG and expanding LLM context windows
@@ -53,12 +53,26 @@ Workflow analysis: TNC permit intake and pre-application — applicant-facing ph
 
 Experiment: RAG policy compliance checking — tested whether AI can check an application against policy requirements, not just internal document consistency. Used a fictional policy document (AP-TNC-2024-01) with two application packages: one compliant, one with two planted compliance gaps. Both gaps detected with specific policy citations and exact document values. Clean result returned accurately on the compliant package with no false positives.
 
+**Week 3 — Human-in-the-Loop Operations**
+Primary question: Where should humans remain central?
+
+Research: AI failure modes in government operations. A taxonomy of seven failure modes (hallucination, silent retrieval failure, confident wrongness, miscalibration, chunking errors, stale retrieval, scope overreach), why failure carries different stakes in government contexts, and principles for failure-aware evaluation design.
+
+Workflow analysis: TNC permit review stress test - stress-tested the established workflow against realistic operating conditions: degraded input conditions, human-AI interaction design (uncertainty communication, override logging), and equity evaluation before sample sizes allow segmentation.
+
+Experiment: Degraded inputs and edge case escalation — five runs across two packages. Key findings: AI flagged degraded fields explicitly with extracted values rather than guessing or skipping silently; output quality varied between clean and loaded session contexts; a structured four-column output format (Requirement | Policy Section | Finding | Status) with a controlled status vocabulary produced more consistent, skimmable, actionable outputs than open-ended format instructions; edge case escalation (ambiguous vehicle configuration) was handled correctly — the AI declined to make a compliance determination and escalated to the reviewer with a clear explanation of why.
+
+Prompt update: System prompt revised after experiment to specify output format, require extracted values in every finding, and define four status labels (Compliant, Non-Compliant, Needs Manual Review, Requires Human Judgment). Retest confirmed improved consistency and actionability.
+
 ## Key findings so far
 - AI can detect cross-document inconsistencies accurately, including inconsistencies that require external knowledge to identify (VIN manufacturer prefixes, vehicle make/model mismatches)
 - AI can check applications against policy requirements when policy is provided as context which grounds responses in specific policy sections rather than general knowledge
 - Clean results (all-clear on compliant applications) are as important as gap detection for staff trust and adoption
 - Output format and prompt design affect calibration quality. Structured output specifications in the prompt produce more consistent, scannable results
 - Trust in AI-generated results takes repeated exposure, even when intellectual trust is earned quickly.
+- Session context affects output quality. Clean sessions (no prior conversation history) produce more specific, skimmable findings than sessions with accumulated context — a deployment variable with direct implications for staff-facing tools.
+- Failure mode awareness shapes evaluation design. Controlled experiments with clean inputs are not a reliable proxy for real-world performance. Adversarial evaluation like testing with degraded inputs, subtle discrepancies, edge cases is necessary before deployment.
+- Edge case escalation requires explicit prompt design. The AI correctly declined to make a compliance determination on an ambiguous vehicle configuration, but this behavior was reinforced by explicit system prompt instructions.
 
 ## What I am not
 
